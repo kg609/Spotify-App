@@ -35,19 +35,29 @@
             ]);
             
             foreach ($playlists->items as $playlist) {
-                echo '<a href="' . $playlist->external_urls->spotify . '">' . $playlist->name . '</a> <br>';
+                echo '<a href="' . $playlist->external_urls->spotify . '">' . $playlist->name . ' ' . $playlist->id . '</a> <br>';
             }
 
-            // It's now possible to request data about the currently authenticated user
-            print_r($api->me()); ?>
+        ?>
             <br/>
             <br/>
 
-            <?php
-            // Getting Spotify catalog data is of course also possible
-            print_r(
-                $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb')
-            );
+    <?php
+            $playlistTracks = $api->getPlaylistTracks('6BFeszm9H2QvDCNe2g31at');
+
+            foreach ($playlistTracks->items as $track) {
+                $track = $track->track;
+            
+                echo '<a href="' . $track->external_urls->spotify . '">' . $track->name . '</a> <br>';
+            }
+    ?>
+
+        <br/>
+        <br/>
+
+    <?php
+            // It's now possible to request data about the currently authenticated user
+            print_r($api->me()); 
         } else {
             header('Location: ' . $session->getAuthorizeUrl($options));
             die();
