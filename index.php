@@ -1,5 +1,3 @@
-<?php
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +47,7 @@
     </header>
 
     <main>
-        <a href="auth.php" class="btn btn-primary">Spotify Link</a>
+        <a href="index2.php" class="btn btn-primary">Spotify Link</a>
     </main>
 
     <footer>
