@@ -4,7 +4,7 @@
     $session = new SpotifyWebAPI\Session(
                 'bc918caade28414794cc1bfc8519ed20',
                 '6f406d87d4834de1bc83b2f81e97cb96',
-                'http://localhost:8888/SpotifyApp/index2.php'
+                'http://localhost:8888/SpotifyApp/songlist.php'
             );
 
             $options = [
