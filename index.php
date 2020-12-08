@@ -1,57 +1,57 @@
-<?php
-    require 'vendor/autoload.php';
-
-    $session = new SpotifyWebAPI\Session(
-                'bc918caade28414794cc1bfc8519ed20',
-                '6f406d87d4834de1bc83b2f81e97cb96',
-                'http://localhost:8888/SpotifyApp/'
-            );
-
-            $options = [
-                'scope' => [
-                    'playlist-read-private',
-                    'user-read-private',
-                ],
-            ];
-
-    $api = new SpotifyWebAPI\SpotifyWebAPI();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SpotifyNoti</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <?php 
-        if (isset($_GET['code'])) {
-            $session->requestAccessToken($_GET['code']);
-            $api->setAccessToken($session->getAccessToken());
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Spotify Notification App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            $playlists = $api->getUserPlaylists($api->me()->id, [
-                'limit' => 5
-            ]);
-            
-            foreach ($playlists->items as $playlist) {
-                echo '<a href="' . $playlist->external_urls->spotify . '">' . $playlist->name . '</a> <br>';
-            }
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Home </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">About </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#">Contact </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-            // It's now possible to request data about the currently authenticated user
-            print_r($api->me()); ?>
-            <br/>
-            <br/>
+    <main>
+        <div class="row">
+            <div class="col-6 pl-3 m-auto">
+                <p>
+                    A web applications that connects to spotify's services and alerts a user with a list of songs that are 6 months or older and can be deleted from a playlist.
+                </p>
 
-            <?php
-            // Getting Spotify catalog data is of course also possible
-            print_r(
-                $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb')
-            );
-        } else {
-            header('Location: ' . $session->getAuthorizeUrl($options));
-            die();
-        }
-    ?>
+                
+                <a href="songlist.php" class="btn btn-primary">Connect with Spotify</a>
+            </div>
+            <div class="col-6">
+                <img src="https://images.pexels.com/photos/5077054/pexels-photo-5077054.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Spotify Nottification App Gif" />
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
